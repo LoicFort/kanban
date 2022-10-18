@@ -20,30 +20,30 @@ public class PriorityController {
   private PriorityService priorityService;
 
   @GetMapping("/priority")
-  public List<Priority> getPriority() {
-    return priorityService.getPriority();
+  public List<Priority> find() {
+    return priorityService.find();
   }
 
   @GetMapping("/priority/{id}")
-  public Priority getOnePriority(@PathVariable("id") final Long id) {
-    return priorityService.getOnePriority(id);
+  public Priority find(@PathVariable("id") final Long id) {
+    return priorityService.find(id);
   }
 
   @DeleteMapping("/priority/{id}")
-  public void deletePriority(@PathVariable("id") final Long id) {
-    priorityService.deletePriority(id);
+  public void delete(@PathVariable("id") final Long id) {
+    priorityService.delete(id);
   }
 
   @PostMapping("/priority")
-  public Priority createPriority(@RequestBody Priority priority) {
+  public Priority insert(@RequestBody Priority priority) {
     System.out.println(priority);
-    return priorityService.createPriority(priority);
+    return priorityService.Insert(priority);
   }
 
   @PutMapping("/priority/{id}")
-  public Priority updatePriority(@PathVariable("id") final Long id,
+  public Priority update(@PathVariable("id") final Long id,
       @RequestBody Priority priority) {
-    return priorityService.updatePriority(id, priority);
+    return priorityService.update(id, priority);
 
   }
 

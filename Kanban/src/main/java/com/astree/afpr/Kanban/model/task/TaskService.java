@@ -11,29 +11,28 @@ public class TaskService {
   @Autowired
   private TaskRepository taskRepository;
 
-  public Task createTask(Task task) {
+  public Task Insert(Task task) {
     Task newTask = new Task(task.getTitle(), task.getDescription());
-    return taskRepository.createTask(newTask);
+    return (Task) taskRepository.insert(newTask);
   }
 
   public List<Task> getTasks() {
     return taskRepository.findAll();
   }
 
-  public Task getOneTask(final Long id) {
-    return taskRepository.findById(id);
+  public Task Find(final Long id) {
+    return (Task) taskRepository.find(id);
   }
 
-  public void deleteTask(final Long id) {
-    taskRepository.deleteById(id);
+  public void Delete(final Long id) {
+    taskRepository.delete(id);
   }
 
-  public Task updateTask(Long id, Task task) {
-    Task taskToUpdate = taskRepository.findById(id);
-    System.out.println(taskToUpdate);
+  public Task Update(Long id, Task task) {
+    Task taskToUpdate = (Task) taskRepository.find(id);
     taskToUpdate.setDescription(task.getDescription());
     taskToUpdate.setTitle(task.getTitle());
-    return taskRepository.updateTask(id, taskToUpdate);
+    return taskRepository.update(id, taskToUpdate);
   }
 
 }

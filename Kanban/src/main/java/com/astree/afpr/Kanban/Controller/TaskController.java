@@ -24,24 +24,24 @@ public class TaskController {
   }
 
   @GetMapping("/tasks/{id}")
-  public Task getOneTask(@PathVariable("id") final Long id) {
-    return taskService.getOneTask(id);
+  public Task Insert(@PathVariable("id") final Long id) {
+    return taskService.Find(id);
   }
 
   @DeleteMapping("/tasks/{id}")
-  public void deleteTask(@PathVariable("id") final Long id) {
-    taskService.deleteTask(id);
+  public void Delete(@PathVariable("id") final Long id) {
+    taskService.Delete(id);
   }
 
   @PostMapping("/tasks")
-  public Task createTask(@RequestBody Task task) {
-      return taskService.createTask(task);
+  public Task Insert(@RequestBody Task task) {
+      return taskService.Insert(task);
   }
 
   @PutMapping("/tasks/{id}")
 
    public Task updateTask(@PathVariable("id") final Long id, @RequestBody Task task) {
-    return taskService.updateTask(id, task);
+    return taskService.Update(id, task);
 
 
   }

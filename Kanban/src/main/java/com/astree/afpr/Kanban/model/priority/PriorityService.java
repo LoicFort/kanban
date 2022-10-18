@@ -11,28 +11,27 @@ public class PriorityService {
   @Autowired
   private PriorityRepository priorityRepository;
 
-  public Priority createPriority(Priority priority) {
+  public Priority Insert(Priority priority) {
     Priority newPriority = new Priority(priority.getLabel());
-    return priorityRepository.createPriority(newPriority);
+    return priorityRepository.insert(newPriority);
   }
 
-  public List<Priority> getPriority() {
+  public List<Priority> find() {
     return priorityRepository.findAll();
   }
 
-  public Priority getOnePriority(final Long id) {
-    return priorityRepository.findById(id);
+  public Priority find(final Long id) {
+    return priorityRepository.find(id);
   }
 
-  public void deletePriority(final Long id) {
-    priorityRepository.deleteById(id);
+  public void delete(final Long id) {
+    priorityRepository.delete(id);
   }
 
-  public Priority updatePriority(Long id, Priority priority) {
-    Priority priorityToUpdate = priorityRepository.findById(id);
-    System.out.println(priorityToUpdate);
+  public Priority  update(Long id, Priority priority) {
+    Priority priorityToUpdate = priorityRepository.find(id);
     priorityToUpdate.setLabel(priority.getLabel());
-    return priorityRepository.updatePriority(id, priorityToUpdate);
+    return priorityRepository.update(id, priorityToUpdate);
   }
 
 }
