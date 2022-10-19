@@ -1,40 +1,19 @@
 package com.astree.afpr.Kanban.model.priority;
 
-
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.astree.afpr.Kanban.core.RestRepositoryImpl;
+import com.astree.afpr.Kanban.core.RestServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PriorityService {
+public class PriorityService extends RestServiceImpl<Priority, Long> {
 
-  @Autowired
-  private PriorityRepository priorityRepository;
-
-  public Priority Insert(Priority priority) {
-    Priority newPriority = new Priority(priority.getLabel());
-    return priorityRepository.insert(newPriority);
+  public PriorityService(RestRepositoryImpl<Priority, Long> repository) {
+    super(repository);
   }
 
-  public List<Priority> find() {
-    return priorityRepository.findAll();
+  @Override
+  public Priority update(Priority toUpdate, Priority newObject) {
+    toUpdate.setLabel(newObject.getLabel());
+    return newObject;
   }
-
-  public Priority find(final Long id) {
-    return priorityRepository.find(id);
-  }
-
-  public void delete(final Long id) {
-    priorityRepository.delete(id);
-  }
-
-  public Priority  update(Long id, Priority priority) {
-    Priority priorityToUpdate = priorityRepository.find(id);
-    priorityToUpdate.setLabel(priority.getLabel());
-    return priorityRepository.update(id, priorityToUpdate);
-  }
-
 }
-
-
-

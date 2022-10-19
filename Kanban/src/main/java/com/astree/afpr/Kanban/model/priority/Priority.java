@@ -1,21 +1,17 @@
 package com.astree.afpr.Kanban.model.priority;
 
-public class Priority {
+import com.astree.afpr.Kanban.core.Identity;
 
+public class Priority extends Identity<Long> {
   private Long id;
   private String label;
 
-  public Priority() {
-  }
-
-  public Priority(String label) {
-    this.label = label;
-  }
-
+  @Override
   public Long getId() {
     return id;
   }
 
+  @Override
   public void setId(Long id) {
     this.id = id;
   }
