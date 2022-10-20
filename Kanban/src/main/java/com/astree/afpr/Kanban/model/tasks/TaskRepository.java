@@ -1,9 +1,9 @@
 package com.astree.afpr.Kanban.model.tasks;
 
-import com.astree.afpr.Kanban.core.RestRepositoryImpl;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TaskRepository extends RestRepositoryImpl<Task, Long> {
+public interface TaskRepository extends JpaRepository<Task, Long> {
 
 }
