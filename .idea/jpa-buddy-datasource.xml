@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="1aaf5a5a-8f9f-463b-82fa-94ed78fde3d1" name="kanban" url="jdbc:postgresql://localhost:5432/kanban" driverClass="org.postgresql.Driver" />
+    </data-sources>
+  </component>
+</project>

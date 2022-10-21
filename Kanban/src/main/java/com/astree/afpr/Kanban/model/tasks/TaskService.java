@@ -1,25 +1,56 @@
 package com.astree.afpr.Kanban.model.tasks;
 
-import com.astree.afpr.Kanban.core.RestRepositoryImpl;
-import com.astree.afpr.Kanban.core.RestServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.astree.afpr.Kanban.core.IService;
+import com.astree.afpr.Kanban.model.entity.TaskEntity;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TaskService extends RestServiceImpl<Task, Long> {
+public class TaskService implements IService<Task, Long> {
 
-  @Autowired
-  public TaskService(RestRepositoryImpl<Task, Long> repository) {
-    super(repository);
-  }
+  private TaskRepository repository;
+  private TaskMapper mapper;
 
-  @Override
-  public Task update(Task toUpdate, Task newObject) {
-    toUpdate.setTitle(newObject.getTitle());
-    toUpdate.setDescription(newObject.getDescription());
-    return newObject;
-
+  public TaskService(TaskRepository taskrepository, TaskMapper mapper) {
+    this.repository = taskrepository;
+    this.mapper = mapper;
   }
 
 
+  public Task update(Long id, Task object) {
+    TaskEntity tasktoUpdate = repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException());
+    tasktoUpdate = mapper.update(tasktoUpdate, object);
+    repository.save(tasktoUpdate);
+    return mapper.map(tasktoUpdate);
+
+  }
+
+
+  public Task create(Task object) {
+    TaskEntity entity = mapper.update(new TaskEntity(), object);
+    repository.save(entity);
+    return mapper.map(entity);
+  }
+
+
+  public List<Task> read() {
+    return repository.findAll()
+        .stream()
+        .map(mapper::map)
+        .collect(Collectors.toList());
+  }
+
+  public Task read(Long id) {
+    TaskEntity entity = repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException());
+    return mapper.map(entity);
+  }
+
+
+  public void delete(Long id) {
+    repository.deleteById(id);
+  }
 }

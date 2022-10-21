@@ -1,5 +1,4 @@
 package com.astree.afpr.Kanban.model.user;
-
 import com.astree.afpr.Kanban.core.IService;
 import com.astree.afpr.Kanban.model.entity.UserEntity;
 import java.util.List;
