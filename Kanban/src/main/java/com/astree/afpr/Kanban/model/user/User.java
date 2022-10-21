@@ -2,18 +2,20 @@ package com.astree.afpr.Kanban.model.user;
 
 import com.astree.afpr.Kanban.core.Identity;
 import com.astree.afpr.Kanban.model.tasks.Task;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User extends Identity<Long> {
   private Long id;
   private String name;
 
-  private Task task;
+  private List<Task> task = new ArrayList<>();
 
-  public Task getTask() {
+  public List<Task> getTask() {
     return task;
   }
 
-  public void setTask(Task task) {
+  public void setTask(List<Task> task) {
     this.task = task;
   }
 

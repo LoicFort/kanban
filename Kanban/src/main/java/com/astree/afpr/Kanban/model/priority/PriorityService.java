@@ -1,19 +1,25 @@
 package com.astree.afpr.Kanban.model.priority;
 
-import com.astree.afpr.Kanban.core.RestRepositoryImpl;
-import com.astree.afpr.Kanban.core.RestServiceImpl;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PriorityService extends RestServiceImpl<Priority, Long> {
+public class PriorityService {
 
-  public PriorityService(RestRepositoryImpl<Priority, Long> repository) {
-    super(repository);
+  private PriorityRepository repository;
+  private PriorityMapper mapper;
+
+  public PriorityService(PriorityRepository repository, PriorityMapper mapper) {
+    this.repository = repository;
+    this.mapper = mapper;
   }
 
-  @Override
-  public Priority update(Priority toUpdate, Priority newObject) {
-    toUpdate.setLabel(newObject.getLabel());
-    return newObject;
+  public List<Priority> read() {
+    return repository.findAll()
+        .stream()
+        .map(mapper::map)
+        .collect(Collectors.toList());
   }
+
 }

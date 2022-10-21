@@ -1,8 +1,8 @@
 package com.astree.afpr.Kanban.model.entity;
 
+import com.astree.afpr.Kanban.model.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,19 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "priorities")
+public class PriorityEntity {
 
   private Long id;
-  private String name;
+  private String label;
 
   private List<TaskEntity> task = new ArrayList<>();
 
-  public UserEntity() {
-  }
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_id")
+  @OneToMany
+  @JoinColumn(name = "priority_id")
   public List<TaskEntity> getTask() {
     return task;
   }
@@ -34,21 +33,24 @@ public class UserEntity {
 
 
 
+  public PriorityEntity() {
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long getId() { return id; }
+  public Long getId() {
+    return id;
+  }
 
   public void setId(Long id) {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getLabel() {
+    return label;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setLabel(String label) {
+    this.label = label;
   }
-
-
 }

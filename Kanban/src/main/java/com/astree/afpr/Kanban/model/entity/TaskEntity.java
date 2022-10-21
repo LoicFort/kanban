@@ -1,24 +1,36 @@
 package com.astree.afpr.Kanban.model.entity;
 
-import com.astree.afpr.Kanban.core.Identity;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tasks")
-public class TaskEntity extends Identity<Long> {
+public class TaskEntity {
 
   private Long id;
   private String title;
   private String description;
 
+  private PriorityEntity priority;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "priority_id", referencedColumnName = "id")
+  public PriorityEntity getPriority() {
+    return priority;
+  }
+
+  public void setPriority(PriorityEntity priority) {
+    this.priority = priority;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-
   public Long getId() {
     return id;
   }

@@ -1,5 +1,4 @@
 package com.astree.afpr.Kanban.model.tasks;
-
 import com.astree.afpr.Kanban.core.IService;
 import com.astree.afpr.Kanban.model.entity.TaskEntity;
 import java.util.List;

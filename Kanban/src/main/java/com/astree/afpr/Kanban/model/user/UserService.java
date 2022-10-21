@@ -4,12 +4,14 @@ import com.astree.afpr.Kanban.model.entity.UserEntity;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IService<User, Long> {
-
+  @Autowired
   private UserRepository repository;
+  @Autowired
   private UserMapper mapper;
 
 
