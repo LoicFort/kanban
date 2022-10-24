@@ -1,7 +1,11 @@
 package com.astree.afpr.Kanban.model.priority;
 
-
+import com.astree.afpr.Kanban.model.entity.PriorityEntity;
+import com.astree.afpr.Kanban.model.entity.UserEntity;
+import com.astree.afpr.Kanban.model.user.User;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,33 +13,46 @@ import org.springframework.stereotype.Service;
 public class PriorityService {
 
   @Autowired
-  private PriorityRepository priorityRepository;
+  private PriorityRepository repository;
+  @Autowired
+  private PriorityMapper mapper;
 
-  public Priority createPriority(Priority priority) {
-    Priority newPriority = new Priority(priority.getLabel());
-    return priorityRepository.createPriority(newPriority);
+  @Autowired
+  public PriorityService(PriorityRepository repository, PriorityMapper mapper) {
+    this.repository = repository;
+    this.mapper = mapper;
   }
 
-  public List<Priority> getPriority() {
-    return priorityRepository.findAll();
+  public Priority create(Priority priority) {
+    PriorityEntity entity = mapper.update(new PriorityEntity(), priority);
+    repository.save(entity);
+    return mapper.map(entity);
+  };
+
+  public List<Priority> read() {
+    return repository.findAll()
+        .stream()
+        .map(mapper::map)
+        .collect(Collectors.toList());
   }
 
-  public Priority getOnePriority(final Long id) {
-    return priorityRepository.findById(id);
+  public Priority read(Long id) {
+    PriorityEntity user = repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException());
+    return mapper.map(user);
   }
 
-  public void deletePriority(final Long id) {
-    priorityRepository.deleteById(id);
+  public Priority update(Long id, Priority priority){
+    PriorityEntity toUpdate = mapper.update(new PriorityEntity(), priority);
+    repository.save(toUpdate);
+    return priority;
+
   }
 
-  public Priority updatePriority(Long id, Priority priority) {
-    Priority priorityToUpdate = priorityRepository.findById(id);
-    System.out.println(priorityToUpdate);
-    priorityToUpdate.setLabel(priority.getLabel());
-    return priorityRepository.updatePriority(id, priorityToUpdate);
+
+  public void delete(Long id) {
+    repository.deleteById(id);
   }
+
 
 }
-
-
-
