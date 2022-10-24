@@ -5,6 +5,7 @@ import com.astree.afpr.Kanban.core.IController;
 import com.astree.afpr.Kanban.model.tasks.Task;
 import com.astree.afpr.Kanban.model.tasks.TaskService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/tasks")
 public class TaskController implements IController<Task, Long> {
 
+
   private TaskService service;
 
+  @Autowired
   public TaskController(TaskService service) {
     this.service = service;
   }

@@ -10,15 +10,15 @@ public class Priority {
   private Long id;
   private String label;
 
-  private List<Task> task = new ArrayList<>();
-
-  public List<Task> getTask() {
-    return task;
-  }
-
-  public void setTask(List<Task> task) {
-    this.task = task;
-  }
+//  private List<Task> task = new ArrayList<>();
+//
+//  public List<Task> getTask() {
+//    return task;
+//  }
+//
+//  public void setTask(List<Task> task) {
+//    this.task = task;
+//  }
 
   public Priority() {
   }

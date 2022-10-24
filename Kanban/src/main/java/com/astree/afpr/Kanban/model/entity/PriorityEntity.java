@@ -19,18 +19,18 @@ public class PriorityEntity {
   private Long id;
   private String label;
 
-  private List<TaskEntity> task = new ArrayList<>();
+//  private List<TaskEntity> task = new ArrayList<>();
+//
+//  @OneToMany
+//  @JoinColumn(name = "priority_id")
+//  public List<TaskEntity> getTask() {
+//    return task;
+//  }
 
-  @OneToMany
-  @JoinColumn(name = "priority_id")
-  public List<TaskEntity> getTask() {
-    return task;
-  }
-
-  public void setTask(List<TaskEntity> task) {
-    this.task = task;
-  }
-
+//  public void setTask(List<TaskEntity> task) {
+//    this.task = task;
+//  }
+//
 
 
   public PriorityEntity() {
